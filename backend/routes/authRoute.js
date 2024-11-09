@@ -11,6 +11,7 @@ router.post("/register", async (req, res) => {
         if (user) {
             return res.status(400).json({message: "User already exists"})
         }
+        // console.log(username, email, password,role);
         const hashPassword = await bcrypt.hash(password, 10);
         const newUser = new User({
             username,
@@ -37,9 +38,10 @@ router.post("/login", async (req, res) => {
         if (!isPasswordValid) {
             return res.status(400).json({message: "Invalid password"});
         }
+        console.log(process.env.JWT_SECRET);
         const token = jwt.sign(
           { id: user._id, role: user.role },
-          jwtSecret,
+          process.env.JWT_SECRET,
           { expiresIn: "1h" }
         );
         res.status(200).json({token});

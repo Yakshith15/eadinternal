@@ -1,9 +1,11 @@
+const mongoose = require("mongoose");
+
 const dataEntrySchema = new mongoose.Schema({
     topic: {
         type: String,
         required: true,
     },
-    link: {
+    dataLink: {
         type: String,
         required: true
     },
