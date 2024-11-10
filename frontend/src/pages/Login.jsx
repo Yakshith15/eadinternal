@@ -1,58 +1,56 @@
+// src/pages/Login.jsx
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
+    role: "researcher", // Default role
   });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log(formData);
+    // Here you would typically send the data to your backend for validation
+    // For now, we're assuming login is always successful
+
+    
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md"
-      >
-        <h1 className="text-3xl font-bold mb-6 text-center">Login</h1>
-
-        <label className="block mb-2">Email</label>
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          className="border border-gray-300 p-2 w-full mb-4 rounded"
-          required
-        />
-
-        <label className="block mb-2">Password</label>
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          className="border border-gray-300 p-2 w-full mb-4 rounded"
-          required
-        />
-
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
-        >
-          Login
-        </button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit} className="p-4 max-w-md mx-auto">
+      <input
+        type="email"
+        name="email"
+        placeholder="Email"
+        onChange={handleChange}
+        className="input"
+        required
+      />
+      <input
+        type="password"
+        name="password"
+        placeholder="Password"
+        onChange={handleChange}
+        className="input"
+        required
+      />
+      <select name="role" onChange={handleChange} className="input" required>
+        <option value="researcher">Researcher</option>
+        <option value="dataProvider">Data Provider</option>
+      </select>
+      <button type="submit" className="btn-primary">
+        Login
+      </button>
+    </form>
   );
 }
 
