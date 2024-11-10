@@ -25,39 +25,104 @@ function Register() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-4 max-w-md mx-auto">
-      <input
-        type="text"
-        name="username"
-        placeholder="Username"
-        onChange={handleChange}
-        className="input"
-        required
-      />
-      <input
-        type="email"
-        name="email"
-        placeholder="Email"
-        onChange={handleChange}
-        className="input"
-        required
-      />
-      <input
-        type="password"
-        name="password"
-        placeholder="Password"
-        onChange={handleChange}
-        className="input"
-        required
-      />
-      <select name="role" onChange={handleChange} className="input" required>
-        <option value="researcher">Researcher</option>
-        <option value="dataProvider">Data Provider</option>
-      </select>
-      <button type="submit" className="btn-primary">
-        Register
-      </button>
-    </form>
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white p-8 rounded-lg shadow-md w-full max-w-md space-y-6"
+      >
+        <h2 className="text-2xl font-semibold text-center text-gray-700">
+          Register
+        </h2>
+        <div className="space-y-4">
+          <div>
+            <label
+              htmlFor="username"
+              className="block text-sm font-medium text-gray-600"
+            >
+              Username
+            </label>
+            <input
+              type="text"
+              name="username"
+              id="username"
+              placeholder="Username"
+              onChange={handleChange}
+              className="mt-1 p-3 border border-gray-300 rounded-md w-full"
+              required
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-600"
+            >
+              Email
+            </label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Email"
+              onChange={handleChange}
+              className="mt-1 p-3 border border-gray-300 rounded-md w-full"
+              required
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-600"
+            >
+              Password
+            </label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Password"
+              onChange={handleChange}
+              className="mt-1 p-3 border border-gray-300 rounded-md w-full"
+              required
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="role"
+              className="block text-sm font-medium text-gray-600"
+            >
+              Role
+            </label>
+            <select
+              name="role"
+              id="role"
+              onChange={handleChange}
+              className="mt-1 p-3 border border-gray-300 rounded-md w-full"
+              required
+            >
+              <option value="researcher">Researcher</option>
+              <option value="dataProvider">Data Provider</option>
+            </select>
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          className="w-full py-3 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600"
+        >
+          Register
+        </button>
+
+        <p className="text-sm text-center text-gray-600">
+          Already have an account?{" "}
+          <a href="/login" className="text-blue-500 hover:underline">
+            Login here
+          </a>
+        </p>
+      </form>
+    </div>
   );
 }
 
