@@ -49,18 +49,15 @@
 // }
 
 // export default ResearcherHome;
-
-
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function ResearcherHome() {
   const [topics, setTopics] = useState([]);
-  const [error, setError] = useState(""); // For error handling
-  const navigate = useNavigate(); // To navigate to a different page
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch list of topics from API
     const fetchTopics = async () => {
       try {
         const response = await fetch("http://localhost:3001/api/data/data", {
@@ -77,7 +74,7 @@ function ResearcherHome() {
         }
 
         const data = await response.json();
-        setTopics(data); // Update state with topics data
+        setTopics(data);
       } catch (error) {
         console.error("Error fetching topics:", error);
         setError("Error fetching topics.");
@@ -88,13 +85,36 @@ function ResearcherHome() {
   }, []);
 
   const handleTopicClick = (topic) => {
-    navigate(`/data/${topic}`); // Navigate to the /data/:topic page
+    navigate(`/data/${topic}`);
+  };
+
+  const handleCreateRoomClick = () => {
+    navigate("/create");
+  };
+
+  const handleJoinRoomClick = () => {
+    navigate("/rooms");
   };
 
   return (
     <div className="max-w-2xl mx-auto mt-10">
       <h2 className="text-3xl font-semibold mb-5">Available Topics</h2>
       {error && <p className="text-red-500 mb-5">{error}</p>}
+
+      <div className="flex gap-4 mb-5">
+        <button
+          onClick={handleCreateRoomClick}
+          className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
+        >
+          Create Room
+        </button>
+        <button
+          onClick={handleJoinRoomClick}
+          className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition"
+        >
+          Join Room
+        </button>
+      </div>
 
       <ul className="grid grid-cols-1 gap-4">
         {topics.map((topic, index) => (
@@ -105,9 +125,6 @@ function ResearcherHome() {
           >
             <span className="text-lg font-medium text-gray-700">
               {topic.topic}
-            </span>
-            <span className="text-sm text-gray-500">
-              {/* Optionally add more info */}
             </span>
           </li>
         ))}
