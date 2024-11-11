@@ -6,7 +6,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import DataProviderHome from "./pages/DataProviderHome";
 import ResearcherHome from "./pages/ResearcherHome";
-
+import TopicData from "./pages/TopicData";
 function App() {
   const { isAuthenticated, role } = useSelector((state) => state.auth);
 
@@ -30,6 +30,7 @@ function App() {
         />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/data/:topic" element={<TopicData />} />
       </Routes>
     </BrowserRouter>
   );
