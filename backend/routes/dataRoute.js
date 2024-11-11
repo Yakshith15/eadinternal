@@ -32,7 +32,9 @@ router.get("/data", auth, async (req, res) => {
   // res.json(dataEntries);
 
   const topics = await Topic.find();
+  console.log(topics);
   res.json(topics);
+
 });
 
 module.exports = router;
