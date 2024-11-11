@@ -18,10 +18,35 @@ function Register() {
     });
   };
 
-  const handleSubmit = (e) => {
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   // Registration logic (store data, call API, etc.)
+  //   navigate("/login");
+  // };
+
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Registration logic (store data, call API, etc.)
-    navigate("/login");
+    try {
+      const response = await fetch("http://localhost:3001/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data.message); // Optional: Display success message
+        navigate("/login");
+      } else {
+        const errorData = await response.json();
+        console.error(errorData.message);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (

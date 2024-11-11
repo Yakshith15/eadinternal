@@ -21,20 +21,57 @@ function Login() {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Simulate a successful login (you'd normally authenticate with a backend)
-    const authToken = "mockToken"; // Should be a token from the backend
-    localStorage.setItem("authToken", authToken); // Store token in localStorage
-    localStorage.setItem("userRole", formData.role); // Store role in localStorage
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   // Simulate a successful login (you'd normally authenticate with a backend)
+  //   const authToken = "mockToken"; // Should be a token from the backend
+  //   localStorage.setItem("authToken", authToken); // Store token in localStorage
+  //   localStorage.setItem("userRole", formData.role); // Store role in localStorage
 
-    // Dispatch login action to Redux
-    dispatch(login({ role: formData.role }));
+  //   // Dispatch login action to Redux
+  //   dispatch(login({ role: formData.role }));
 
-    // Redirect to home page
-    navigate("/");
+  //   // Redirect to home page
+  //   navigate("/");
+  // };
+
+
+   const handleSubmit = async (e) => {
+     console.log(formData);
+     e.preventDefault();
+    //  setError(null); // Clear previous errors
+     try {
+       const response = await fetch("http://localhost:3001/api/auth/login", {
+         method: "POST",
+         headers: {
+           "Content-Type": "application/json",
+         },
+         body: JSON.stringify({
+           email: formData.email,
+           password: formData.password,
+         }),
+       });
+
+       if (response.ok) {
+         const data = await response.json();
+         localStorage.setItem("authToken", data.token);
+         localStorage.setItem("userRole", formData.role);
+
+         // Dispatch login action to Redux with user role
+         dispatch(login({ role: formData.role }));
+
+         navigate("/");
+       } else {
+         const errorData = await response.json();
+         setError(errorData.message);
+       }
+     } catch (error) {
+       console.error("Error:", error);
+       setError("An error occurred. Please try again later.");
+     }
   };
-
+  
+  
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <form

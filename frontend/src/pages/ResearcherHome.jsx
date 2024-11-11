@@ -6,7 +6,7 @@ function ResearcherHome() {
   useEffect(() => {
     // Fetch list of topics from API
     const fetchTopics = async () => {
-      const response = await fetch("/api/topics"); // Replace with actual endpoint
+      const response = await fetch("/api/data/data"); // Replace with actual endpoint
       const data = await response.json();
       setTopics(data);
     };

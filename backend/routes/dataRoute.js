@@ -28,11 +28,11 @@ router.post("/data", auth, async (req, res) => {
 
 // Researcher - Get Data Entries
 router.get("/data", auth, async (req, res) => {
-  const dataEntries = await DataEntry.find().populate("provider", "username");
-  res.json(dataEntries);
+  // const dataEntries = await DataEntry.find().populate("provider", "username");
+  // res.json(dataEntries);
 
   const topics = await Topic.find();
-  console.log(topics);
+  res.json(topics);
 });
 
 module.exports = router;
