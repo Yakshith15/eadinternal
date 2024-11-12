@@ -21,20 +21,6 @@ function Login() {
     });
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   // Simulate a successful login (you'd normally authenticate with a backend)
-  //   const authToken = "mockToken"; // Should be a token from the backend
-  //   localStorage.setItem("authToken", authToken); // Store token in localStorage
-  //   localStorage.setItem("userRole", formData.role); // Store role in localStorage
-
-  //   // Dispatch login action to Redux
-  //   dispatch(login({ role: formData.role }));
-
-  //   // Redirect to home page
-  //   navigate("/");
-  // };
-
 
    const handleSubmit = async (e) => {
      console.log(formData);
@@ -56,7 +42,7 @@ function Login() {
          const data = await response.json();
          localStorage.setItem("authToken", data.token);
          localStorage.setItem("userRole", formData.role);
-
+        localStorage.setItem("userEmail", formData.email);
          // Dispatch login action to Redux with user role
          dispatch(login({ role: formData.role }));
 

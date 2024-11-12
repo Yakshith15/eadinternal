@@ -7,6 +7,10 @@ import Login from "./pages/Login";
 import DataProviderHome from "./pages/DataProviderHome";
 import ResearcherHome from "./pages/ResearcherHome";
 import TopicData from "./pages/TopicData";
+import CreateRoom from "./pages/CreateRoom";
+import RoomsList from "./pages/RoomsList";
+import RoomChat from './pages/RoomChat';
+
 function App() {
   const { isAuthenticated, role } = useSelector((state) => state.auth);
 
@@ -31,6 +35,9 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/data/:topic" element={<TopicData />} />
+        <Route path="/create" element={<CreateRoom />} />
+        <Route path="/rooms" element={<RoomsList />} />
+        <Route path="/rooms/:roomId" element={<RoomChat />} />
       </Routes>
     </BrowserRouter>
   );
